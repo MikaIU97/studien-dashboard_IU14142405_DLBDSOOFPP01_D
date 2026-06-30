@@ -4,6 +4,7 @@ from services.dashboard_service import DashboardService
 
 
 class ConsoleUI:
+    """Stellt die Benutzeroberfläche für die Konsole bereit."""
     def __init__(self, service: DashboardService) -> None:
         self.service = service
     
@@ -16,6 +17,7 @@ class ConsoleUI:
         print(titel)
 
     def zeige_dashboard(self) -> None:
+        """Zeigt das Dashboard mit den wichtigsten Informationen zum Studium an."""
         studium = self.service.studium
         aktuelles_semester = self.service.hole_aktuelles_semester()
 
@@ -71,6 +73,7 @@ class ConsoleUI:
 
 
     def zeige_kurse(self) -> None:
+        """Zeigt alle aktuellen Kurse an."""
         print("\n" + "=" * 50)
         print("AKTUELLE KURSE")
         print("=" * 50)
@@ -86,6 +89,7 @@ class ConsoleUI:
                 print("-" * 50)
 
     def zeige_pruefungsergebnisse(self) -> None:
+        """Zeigt alle Prüfungsergebnisse an."""
         print("\n" + "=" * 50)
         print("PRÜFUNGSERGEBNISSE")
         print("=" * 50)
@@ -112,6 +116,7 @@ class ConsoleUI:
                 print("-" * 50)
 
     def zeige_studieninformationen(self) -> None:
+        """Zeigt die allgemeinen Informationen zum Studium an."""
         studium = self.service.studium
 
         print("\n" + "=" * 50)
@@ -126,6 +131,7 @@ class ConsoleUI:
         print(f"Gesamt-ECTS          : {studium.ziel_ects_gesamt}")
 
     def starte(self) -> None:
+        """Startet die Benutzeroberfläche und zeigt das Hauptmenü an."""
 
         while True:
 
