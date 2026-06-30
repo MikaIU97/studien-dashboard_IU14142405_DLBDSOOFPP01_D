@@ -6,6 +6,7 @@ from models.pruefungsleistung import Pruefungsleistung
 
 @dataclass
 class Studium:
+    """Speichert alle notwendigen Informationen zu einem Studium, einschließlich der Studiengangsdetails, der Semester und der Prüfungsleistungen."""
     studiengang_name: str
     regelstudienzeit_semester: int
     ziel_notenschnitt: float
