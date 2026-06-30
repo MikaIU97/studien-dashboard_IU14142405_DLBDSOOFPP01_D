@@ -8,10 +8,12 @@ from models.pruefungsleistung import Pruefungsleistung
 
 
 class JsonRepository:
+    """Lädt die Daten des Studiums aus einer JSON-Datei."""
     def __init__(self, dateipfad: str) -> None:
         self.dateipfad = Path(dateipfad)
 
     def lade_daten(self) -> Studium:
+        """Liest die JSON-Datei und erstellt ein Studium-Objekt mit den geladenen Daten."""
         with self.dateipfad.open("r", encoding="utf-8") as file:
             daten = json.load(file)
 
