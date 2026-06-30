@@ -5,10 +5,12 @@ from datetime import datetime
 
 
 class DashboardService:
+    """Bietet Funktionen zur Berechnung und Auswertung für das Dashboard."""
     def __init__(self, studium: Studium) -> None:
         self.studium = studium
 
     def berechne_notenschnitt(self) -> float:
+        """Berechnet den Notendurchschnitt"""
         benotete_pruefungen = [
             p for p in self.studium.pruefungsleistungen
             if p.bestanden and p.note is not None
@@ -20,6 +22,7 @@ class DashboardService:
         return sum(p.note for p in benotete_pruefungen) / len(benotete_pruefungen)
 
     def berechne_ects_gesamt(self) -> int:
+        """Berechnet die Gesamt-ECTS-Punkte, die bisher erreicht worden sind."""
         return sum(
             p.ects for p in self.studium.pruefungsleistungen if p.bestanden
         )
@@ -39,6 +42,7 @@ class DashboardService:
         return aktuelles_semester.ects_erreicht
 
     def berechne_zeitstatus(self) -> str:
+        """Ermittelt, ob das Studium im Plan oder verzögert ist."""
         ects_aktuelles_semester = self.berechne_ects_aktuelles_semester()
 
         if ects_aktuelles_semester >= self.studium.ziel_ects_pro_semester:
@@ -47,6 +51,7 @@ class DashboardService:
         return "verzögert"
 
     def hole_aktuelle_kurse(self) -> list[Modul]:
+        """Gibt alle belegten Module zurück."""
         aktuelles_semester = self.hole_aktuelles_semester()
 
         if aktuelles_semester is None:
@@ -57,6 +62,7 @@ class DashboardService:
         ]
 
     def hole_pruefungsergebnisse(self) -> list[Pruefungsleistung]:
+        """Liefert die Prüfungsergebnisse sortiert nach Datum."""
         def sortierschluessel(pruefung: Pruefungsleistung):
             if pruefung.datum is None:
                 return datetime.min
